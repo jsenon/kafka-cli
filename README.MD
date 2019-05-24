@@ -17,7 +17,7 @@ RUSTFLAGS='-C link-args=-lzstd'  cargo build --release
 ```sh
 Kafka Cli 1.0
 Julien Senon <julien.senon@gmail.com>
-Producer and consumer kafka command line
+Rust producer and consumer kafka command line
 
 USAGE:
     kafka-cli [FLAGS] [SUBCOMMAND]
@@ -30,5 +30,5 @@ FLAGS:
 SUBCOMMANDS:
     consumer    Launch Consumer
     help        Prints this message or the help of the given subcommand(s)
-    producer    Launch Consumer
+    producer    Launch Producer
 ```
