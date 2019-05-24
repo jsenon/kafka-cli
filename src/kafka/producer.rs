@@ -7,7 +7,7 @@ use rdkafka::producer::{BaseProducer, BaseRecord};
 use std::time::Duration;
 
 
-pub fn produce(brokers: &str, topic_name: &str) {
+pub fn produce(brokers: &str, topic_name: &str, msg: &str) {
     println!("Preparing sending message");
     let producer: BaseProducer = ClientConfig::new()
         .set("bootstrap.servers", brokers)
@@ -19,7 +19,7 @@ pub fn produce(brokers: &str, topic_name: &str) {
 
     producer.send(
         BaseRecord::to(topic_name)
-            .payload("kikoo")
+            .payload(msg)
             .key("poduce_cli"),
     ).expect("Failed to enqueue");
     println!("Message send");

@@ -8,7 +8,7 @@ fn main() {
     let matches = App::new("Kafka Cli")
                           .version("1.0")
                           .author("Julien Senon <julien.senon@gmail.com>")
-                          .about("Producer and consumer kafka command line")
+                          .about("Rust producer and consumer kafka command line")
                           .arg(Arg::with_name("v")
                                .short("v")
                                .multiple(true)
@@ -37,7 +37,11 @@ fn main() {
                                         .short("d")
                                         .help("print debug information verbosely")))
                           .subcommand(SubCommand::with_name("producer")
-                                    .about("Launch Consumer")
+                                    .about("Launch Producer")
+                                    .arg(Arg::with_name("msg")
+                                        .help("Message to sent")
+                                        .required(true)
+                                        .index(1))
                                     .arg(Arg::with_name("brokers")
                                         .short("b")
                                         .long("brokers")
@@ -60,7 +64,9 @@ fn main() {
         println!("topic: {}", topic);
         let brokers = matches.value_of("brokers").unwrap();
         println!("brokers: {}", brokers);
-        kafka::producer::produce(brokers, topic);
+        let msg = matches.value_of("msg").unwrap();
+        println!("message: {}", msg);
+        kafka::producer::produce(brokers, topic, msg);
     }
 
     // Vary the output based on how many times the user used the "verbose" flag
